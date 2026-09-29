@@ -1,54 +1,64 @@
 import 'package:flutter/material.dart';
 
-import '../data/movies_data.dart';
-import 'details_screen.dart';
+import '../models/movie.dart';
 
-// HomeScreen displays all of the movies in a scrollable list.
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+// DetailsScreen displays all of the information for the selected movie.
+class DetailsScreen extends StatelessWidget {
+  final Movie movie;
+
+  const DetailsScreen({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Movie Watchlist'), centerTitle: true),
-
-      // ListView.builder creates a scrollable list from our movie data.
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: sampleMovies.length,
-        itemBuilder: (context, index) {
-          final movie = sampleMovies[index];
-
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(12),
-
-              // The movie title is displayed for each item.
-              title: Text(
-                movie.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+      appBar: AppBar(title: Text(movie.title)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Displays the movie poster.
+            Center(
+              child: Image.asset(
+                movie.posterPath,
+                height: 400,
+                fit: BoxFit.cover,
               ),
-
-              subtitle: const Text('Tap to view details'),
-              trailing: const Icon(Icons.chevron_right),
-
-              // Tapping a movie opens DetailsScreen and passes
-              // the complete Movie object to the next screen.
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(movie: movie),
-                  ),
-                );
-              },
             ),
-          );
-        },
+
+            const SizedBox(height: 20),
+
+            // Displays the movie title.
+            Text(
+              movie.title,
+              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Displays the cast members.
+            const Text(
+              'Cast',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 8),
+
+            Text(movie.cast.join(', ')),
+
+            const SizedBox(height: 16),
+
+            // Displays the movie synopsis.
+            const Text(
+              'Synopsis',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 8),
+
+            Text(movie.synopsis),
+          ],
+        ),
       ),
     );
   }
