@@ -1,0 +1,3 @@
+# Critical Thinking - In-Class Activity 06
+
+I used the center and radius of the face to position the smile instead of using fixed pixel values. The mouth uses drawArc and its size and position are calculated from the radius, which helps it stay centered when the screen size changes. I tested the smiley on the phone emulator and the face and mouth stayed positioned correctly as the layout changed. The shouldRepaint method returns true when an input such as mood changes so the painter redraws, but returns false when the inputs stay the same.
