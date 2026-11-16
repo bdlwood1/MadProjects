@@ -1,0 +1,16 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "ica16-cloud-quiz-bryce",
+          "appId": "1:435610621411:android:df33f92dafd7175d3c3cd6",
+          "fileOutput": "android/app/google-services.json"
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

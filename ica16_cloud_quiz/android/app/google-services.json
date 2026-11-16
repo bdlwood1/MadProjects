@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "435610621411",
+    "project_id": "ica16-cloud-quiz-bryce",
+    "storage_bucket": "ica16-cloud-quiz-bryce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435610621411:android:df33f92dafd7175d3c3cd6",
+        "android_client_info": {
+          "package_name": "com.example.ica16_cloud_quiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxcn_kdupazTJhkqkPYkX7cIKRf20lTk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
