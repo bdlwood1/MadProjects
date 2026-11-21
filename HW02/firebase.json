@@ -1,0 +1,24 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "hw02-message-board-bryce",
+          "appId": "1:436553436699:android:0858de5a99f24aeed4b2be",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "hw02-message-board-bryce",
+          "configurations": {
+            "android": "1:436553436699:android:0858de5a99f24aeed4b2be"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

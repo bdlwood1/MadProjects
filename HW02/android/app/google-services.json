@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "436553436699",
+    "project_id": "hw02-message-board-bryce",
+    "storage_bucket": "hw02-message-board-bryce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436553436699:android:0858de5a99f24aeed4b2be",
+        "android_client_info": {
+          "package_name": "com.example.hw02_message_board"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3usEEjqnrV9Lbilym5ytsq_U-Z0iM_P0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

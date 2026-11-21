@@ -1,0 +1,67 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Check if a user is authenticated.
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // User profiles are private.
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasAll([
+          'uid', 'firstName', 'lastName',
+          'role', 'registrationDateTime'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'uid', 'firstName', 'lastName',
+          'role', 'registrationDateTime'
+        ])
+        && request.resource.data.uid == uid
+        && request.resource.data.firstName is string
+        && request.resource.data.lastName is string
+        && request.resource.data.role == 'user'
+        && request.resource.data.registrationDateTime == request.time;
+
+      allow update, delete: if false;
+    }
+
+    // Messages are readable by authenticated users.
+    match /messages/{messageId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasAll([
+          'text', 'authorUid', 'authorName', 'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'text', 'authorUid', 'authorName', 'createdAt'
+        ])
+        && request.resource.data.authorUid == request.auth.uid
+        && request.resource.data.authorName is string
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.createdAt == request.time;
+
+      // Only the original author can edit their message.
+      allow update: if signedIn()
+        && resource.data.authorUid == request.auth.uid
+        && request.resource.data.diff(resource.data)
+            .affectedKeys().hasOnly(['text', 'editedAt'])
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.editedAt == request.time;
+
+      // Only the original author can delete their message.
+      allow delete: if signedIn()
+        && resource.data.authorUid == request.auth.uid;
+    }
+  }
+}
